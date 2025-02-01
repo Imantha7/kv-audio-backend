@@ -3,16 +3,17 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-export function registerUser(req, res)
-{
+dotenv.config();
+export function registerUser(req, res) {
+  const data = req.body;
 
-    const data = req.body;
+  data.password = bcrypt.hashSync(data.password, 10);
+  //#
+  const newUser = new User(data);
 
-    data.password = bcrypt.hashSync(data.password,10)
-
-    const newUser = new User(data)
-
-    newUser.save().then(() => {
+  newUser
+    .save()
+    .then(() => {
       res.json({ message: "User registered successfully" });
     })
     .catch((error) => {
@@ -38,13 +39,20 @@ export function loginUser(req, res) {
           firstName : user.firstName,
           lastName : user.lastName,
           email : user.email,
-          role : user.role
+          role : user.role,
+          profilePicture : user.profilePicture
         },process.env.JWT_SECRET);
+
         res.json({ message: "Login successful" , token : token});
+
       } else {
         res.status(401).json({ error: "Login failed" });
       }
     }
   });
 
-} 
+}
+
+
+// piyumal.doe@example.com - securePassword123 - customer
+// john.doe@example.com - securePassword123 - admin - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwicHJvZmlsZVBpY3R1cmUiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS9pbWFnZXMvcHJvZmlsZS9qb2huX2RvZS5qcGciLCJpYXQiOjE3MzgyNTkwODh9.1d5Afk8N00PatNcBxvPjj571D19nJfh-i7vV51JCqr8
