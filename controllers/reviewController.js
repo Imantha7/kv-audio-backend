@@ -46,7 +46,7 @@ import Review from "../models/review.js";
 
   }
 
-  export function deleteReview(){
+  export function deleteReview(req, res){
     const email = req.params.email;
 
     if(req.user == null){
@@ -80,4 +80,4 @@ import Review from "../models/review.js";
     }
   }
 
- 
+  
