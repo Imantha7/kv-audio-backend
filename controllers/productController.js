@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import { isItAdmin } from "./userController.js";
 
 export function addProduct(req,res){
 
@@ -10,7 +11,7 @@ export function addProduct(req,res){
         })
         return
     }
-    if(req.user != "admin"){
+    if(req.user.role != "admin"){
         res.status(403).json({
             message : "You are not authorized to perform this action"
         })
@@ -29,3 +30,6 @@ export function addProduct(req,res){
     });
     
 }
+
+
+  
