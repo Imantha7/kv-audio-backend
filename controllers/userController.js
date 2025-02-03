@@ -65,6 +65,18 @@ export function isItAdmin(req){
   return isAdmin;
 }
 
+export function isItCustomer(req){
+  let isCustomer = false;
+
+  if(req.user != null){
+    if(req.user.role == "customer"){
+      isCustomer = true;
+    }
+  }
+
+  return isCustomer;
+}
+
 
 // piyumal.doe@example.com - securePassword123 - customer - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6InBpeXVtYWwuZG9lQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwicHJvZmlsZVBpY3R1cmUiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS9pbWFnZXMvcHJvZmlsZS9qb2huX2RvZS5qcGciLCJpYXQiOjE3Mzg0NjU0NTN9.ZMTYclaizlQ3B2FjuWkksLTpRoGGOmd9x0HYrGiB5O0
 // john.doe@example.com - securePassword123 - admin - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwicm9sZSI6ImN1c3RvbWVyIiwicHJvZmlsZVBpY3R1cmUiOiJodHRwczovL3d3dy5leGFtcGxlLmNvbS9pbWFnZXMvcHJvZmlsZS9qb2huX2RvZS5qcGciLCJpYXQiOjE3MzgyNTkwODh9.1d5Afk8N00PatNcBxvPjj571D19nJfh-i7vV51JCqr8
