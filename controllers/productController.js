@@ -79,8 +79,11 @@ export async function getProducts(req,res){
         if(isItAdmin(req)){
             const key = req.params.key;
             await Product.deleteOne({key: key})
-        }else{
             res.json({
+                message: "Product deleted successfully"
+            })
+        }else{
+            res.status(403).json({
                 message: "You are not authorized to perform this action"
             })
             return
